@@ -1,0 +1,75 @@
+#include <iostream>
+
+class MyStack {
+private:
+    int Stack[100];
+    int Top;
+    int MaxSize;
+
+public:
+    MyStack(int Size = 100) {
+        MaxSize = Size;
+        Top = 0;
+    }
+
+    bool isEmpty() {
+        return Top == 0;
+    }
+
+    bool isFull() {
+        return Top == MaxSize;
+    }
+
+    bool push(int Element) {
+        if (isFull()) {
+            std::cout << "Stack Overflow\n";
+            return false;
+        }
+        Stack[Top++] = Element;
+        return true;
+    }
+
+    bool pop() {
+        if (isEmpty()) {
+            std::cout << "Stack Underflow\n";
+            return false;
+        }
+        Top--;
+        return true;
+    }
+
+    int topElement() {
+        if (isEmpty()) {
+            std::cout << "Stack is empty\n";
+            return -1; // assuming -1 denotes an invalid value
+        }
+        return Stack[Top - 1];
+    }
+
+    void show() {
+        if (isEmpty()) {
+            std::cout << "Stack is empty\n";
+            return;
+        }
+        std::cout << "Stack elements: ";
+        for (int i = 0; i < Top; i++) {
+            std::cout << Stack[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    MyStack stack(5); // Creating stack of size 5
+    stack.push(1);
+    stack.push(2);
+    stack.push(3);
+    stack.show(); // Output: Stack elements: 1 2 3
+
+    stack.pop();
+    stack.show(); // Output: Stack elements: 1 2
+
+    std::cout << "Top element: " << stack.topElement() << std::endl; // Output: Top element: 2
+
+    return 0;
+}

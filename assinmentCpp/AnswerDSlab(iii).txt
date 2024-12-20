@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+const int maxSize = 100; // Maximum size of the queue
+
+int queue[maxSize]; // Array to store queue elements
+int front = -1; // Initialize front
+int rear = -1;  // Initialize rear
+
+// Function to check if the queue is empty
+bool isEmpty() {
+    if (front == -1 && rear == -1)
+        return true;
+    else
+        return false;
+}
+
+// Function to check if the queue is full
+bool isFull() {
+    if (rear == maxSize - 1)
+        return true;
+    else
+        return false;
+}
+
+// Function to add an element to the queue (enqueue)
+void enqueue(int x) {
+    if (isFull()) {
+        cout << "Queue full!" << endl;
+    } else if (isEmpty()) {
+        front = rear = 0;
+        queue[rear] = x;
+    } else {
+        rear++;
+        queue[rear] = x;
+    }
+}
+
+// Function to remove an element from the queue (dequeue)
+void dequeue() {
+    if (isEmpty()) {
+        cout << "Queue is empty. Cannot dequeue." << endl;
+    } else if (front == rear) {
+        front = rear = -1;
+    } else {
+        front++;
+    }
+}
+
+// Function to get the front element of the queue
+int getFront() {
+    if (isEmpty()) {
+        cerr << "Queue is empty. No front element." << endl;
+        exit(EXIT_FAILURE);
+    }
+    return queue[front];
+}
+
+int main() {
+    // Add elements to the queue
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+
+    // Print the front element of the queue
+    cout << "Front element of the queue: " << getFront() << endl;
+
+    // Remove an element from the queue
+    dequeue();
+
+    // Print the front element after removal
+    cout << "Front element of the queue after dequeue: " << getFront() << endl;
+
+    return 0;
+}
